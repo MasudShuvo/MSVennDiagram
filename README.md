@@ -15,4 +15,4 @@ self.vennDiagram.frame = CGRectMake(80, 150, self.vennDiagram.frame.size.width, 
 [yourView addSubview:self.vennDiagram];
 ```
 # Screen shot
-![image](https://raw.githubusercontent.com/MasudShuvo/MSVennDiagram/master/ScreenShot/vennDiagram.png)
+![image](https://raw.githubusercontent.com/MasudShuvo/MSVennDiagram/master/ScreenShot/screenshot.png)
