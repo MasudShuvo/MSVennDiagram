@@ -15,6 +15,7 @@
 @property (nonatomic, assign) BOOL isSetBSmallerSet;
 @property (nonatomic, strong) MSSet *aSet;
 @property (nonatomic, strong) MSSet *bSet;
+@property (nonatomic, strong) UIView *vennView;
 
 @end
 
@@ -42,8 +43,12 @@
     self.aSet.areaColor = [UIColor colorWithRed:53.0/255.0 green:196.0/255.0 blue:181.0/255.0 alpha:0.5];
     self.bSet.areaColor = [UIColor colorWithRed:74.0/255.0 green:144.0/255.0 blue:226.0/255.0 alpha:0.5];
     
-    [[self layer] addSublayer:self.aSet.shapeLayer];
-    [[self layer] addSublayer:self.bSet.shapeLayer];
+    self.vennView = [[UIView alloc] init];
+    self.vennView.frame = self.bounds;
+    [self addSubview:self.vennView];
+    
+    [[self.vennView layer] addSublayer:self.aSet.shapeLayer];
+    [[self.vennView layer] addSublayer:self.bSet.shapeLayer];
 }
 
 - (void)setASetAreaColor:(UIColor *)aSetAreaColor
@@ -64,8 +69,13 @@
     [self.aSet.shapeLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, self.aSet.yPosition, self.aSet.diameter, self.aSet.diameter)] CGPath]];
     [self.aSet.shapeLayer setFillColor:[self.aSet.areaColor CGColor]];
     
-    [self.bSet.shapeLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(self.aSet.diameter - distanceBetweenCircleCenters*2, self.bSet.yPosition, self.bSet.diameter, self.bSet.diameter)] CGPath]];
+    [self.bSet.shapeLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(self.aSet.diameter - distanceBetweenCircleCenters, self.bSet.yPosition, self.bSet.diameter, self.bSet.diameter)] CGPath]];
     [self.bSet.shapeLayer setFillColor:[self.bSet.areaColor CGColor]];
+    
+    CGFloat width = self.aSet.diameter + self.bSet.diameter - distanceBetweenCircleCenters;
+    CGFloat height = [self radiusOfLargeSet] * 2;
+    
+    self.vennView.frame = CGRectMake((self.bounds.size.width - width)/2, (self.bounds.size.height - height)/2, width, height);
 }
 
 - (void)populateSetObjects:(float)setA setB:(float)setB setAintersectB:(float)setAintersectB viewWidth:(float)viewWidth
@@ -103,17 +113,24 @@
     return [self areaWithDiameter:self.aSet.diameter];
 }
 
-- (float)radiusOfSmallerSet {
+- (float)radiusOfSmallSet {
     if (self.isSetBSmallerSet) {
         return self.bSet.diameter / 2;
     }
     return self.aSet.diameter / 2;
 }
 
+- (float)radiusOfLargeSet {
+    if (self.isSetBSmallerSet) {
+        return self.aSet.diameter / 2;
+    }
+    return self.bSet.diameter / 2;
+}
+
 - (float)distanceBetweenTwoCircleWithCirclesIntersectArea:(float)ciclesIntersectArea
 {
     if (ciclesIntersectArea >= [self areaOfSmallerSet]) {
-        return [self radiusOfSmallerSet];
+        return [self radiusOfSmallSet];
     }
     int i = 0;
     float theta, sigma = 0;
@@ -129,7 +146,7 @@
         
     } while(A <= ciclesIntersectArea);
     
-    return i;
+    return i * 2;
 }
 
 - (float)angleWithHypotenuse:(float)hypotenuse withAdjacent:(float)adjacent

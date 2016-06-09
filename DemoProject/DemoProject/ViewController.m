@@ -30,7 +30,7 @@
     //self.vennDiagram.aSetAreaColor = [UIColor colorWithRed:1.0 green:0.0 blue:0.0 alpha:0.5];
     //self.vennDiagram.bSetAreaColor = [UIColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:0.5];
     
-    self.vennDiagram.frame = CGRectMake(80, 150, self.vennDiagram.frame.size.width, self.vennDiagram.frame.size.height);
+    self.vennDiagram.frame = CGRectMake(0, 150, self.vennDiagram.frame.size.width, self.vennDiagram.frame.size.height);
     
     [self.vennDiagram vennDiagramForSetA:100 setB:100 setAintersectB:50];
     [self.view addSubview:self.vennDiagram];

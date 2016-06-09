@@ -123,8 +123,8 @@
 			children = (
 				EF00BE601D06B19A007BED2B /* MSSet.h */,
 				EF00BE611D06B19A007BED2B /* MSSet.m */,
-				EF00BE631D06B19A007BED2B /* MSVennDiagram.m */,
 				EF00BE621D06B19A007BED2B /* MSVennDiagram.h */,
+				EF00BE631D06B19A007BED2B /* MSVennDiagram.m */,
 			);
 			name = VennDiagram;
 			sourceTree = "<group>";
@@ -424,6 +424,7 @@
 				EF00BE581D06B055007BED2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EF00BE591D06B055007BED2B /* Build configuration list for PBXNativeTarget "DemoProjectTests" */ = {
 			isa = XCConfigurationList;
@@ -432,6 +433,7 @@
 				EF00BE5B1D06B055007BED2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
