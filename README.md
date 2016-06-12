@@ -9,8 +9,6 @@ Initiate an object of MSVennDiagram class, and add the view where you want to di
 # Sample code
 ```
 MSVennDiagram *vennDiagram = [[MSVennDiagram alloc] init];
-self.vennDiagram.frame = CGRectMake(80, 150, self.vennDiagram.frame.size.width, self.vennDiagram.frame.size.height);
-
 [self.vennDiagram vennDiagramForSetA:100 setB:100 setAintersectB:50];
 [yourView addSubview:self.vennDiagram];
 ```
